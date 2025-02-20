@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 /**
  * EmptyMenu class displays a console-based menu for the Medication Tracking System.
- * It allows users to add, delete, and view patients, doctors, and medications.
+ * It allows users to add, delete, view, and search patients, doctors, and medications.
  */
 public class EmptyMenu {
 
+    // Creating an instance of MedicationTrackingSystem to manage the entities
     private MedicationTrackingSystem trackingSystem;
     private Scanner scanner;
 
@@ -44,6 +45,9 @@ public class EmptyMenu {
             System.out.println("7. View All Patients");
             System.out.println("8. View All Doctors");
             System.out.println("9. View All Medications");
+            System.out.println("10. Search Patient by Name");
+            System.out.println("11. Search Doctor by Name");
+            System.out.println("12. Search Medication by Name");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             
@@ -76,6 +80,15 @@ public class EmptyMenu {
                     break;
                 case 9:
                     viewAllMedications();
+                    break;
+                case 10:
+                    searchPatient();
+                    break;
+                case 11:
+                    searchDoctor();
+                    break;
+                case 12:
+                    searchMedication();
                     break;
                 case 0:
                     System.out.println("Exiting Medication Tracking System...");
@@ -190,3 +203,4 @@ public class EmptyMenu {
         trackingSystem.displayAllMedications();
     }
 }
+
