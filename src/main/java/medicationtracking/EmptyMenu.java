@@ -199,8 +199,4 @@ public class EmptyMenu {
      * Displays all medications.
      */
     private void viewAllMedications() {
-        System.out.println("\n=== All Medications ===");
-        trackingSystem.displayAllMedications();
-    }
-}
-
+        System.out.println("\n=== All 
