@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * MedicationTrackingSystem class manages the lists and operations 
  * for the medication tracking system.
+ * It allows adding, deleting, displaying, and searching patients, doctors, and medications.
  */
 public class MedicationTrackingSystem {
     // List to store all patients
@@ -22,6 +23,10 @@ public class MedicationTrackingSystem {
      * @param patient The patient to add.
      */
     public void addPatient(Patient patient) {
+        if (patient == null) {
+            System.out.println("Invalid patient details.");
+            return;
+        }
         patients.add(patient);
         System.out.println("Patient added: " + patient.getName());
     }
@@ -31,9 +36,16 @@ public class MedicationTrackingSystem {
      * @param patientId The ID of the patient to delete.
      */
     public void deletePatient(String patientId) {
-        // Loop through the list and remove the patient with the matching ID
-        patients.removeIf(patient -> patient.getId().equals(patientId));
-        System.out.println("Patient deleted with ID: " + patientId);
+        if (patientId == null || patientId.trim().isEmpty()) {
+            System.out.println("Invalid patient ID.");
+            return;
+        }
+        boolean removed = patients.removeIf(patient -> patient.getId().equals(patientId));
+        if (removed) {
+            System.out.println("Patient deleted with ID: " + patientId);
+        } else {
+            System.out.println("No patient found with ID: " + patientId);
+        }
     }
 
     /**
@@ -41,6 +53,10 @@ public class MedicationTrackingSystem {
      * @param doctor The doctor to add.
      */
     public void addDoctor(Doctor doctor) {
+        if (doctor == null) {
+            System.out.println("Invalid doctor details.");
+            return;
+        }
         doctors.add(doctor);
         System.out.println("Doctor added: " + doctor.getName());
     }
@@ -50,9 +66,16 @@ public class MedicationTrackingSystem {
      * @param doctorId The ID of the doctor to delete.
      */
     public void deleteDoctor(String doctorId) {
-        // Loop through the list and remove the doctor with the matching ID
-        doctors.removeIf(doctor -> doctor.getId().equals(doctorId));
-        System.out.println("Doctor deleted with ID: " + doctorId);
+        if (doctorId == null || doctorId.trim().isEmpty()) {
+            System.out.println("Invalid doctor ID.");
+            return;
+        }
+        boolean removed = doctors.removeIf(doctor -> doctor.getId().equals(doctorId));
+        if (removed) {
+            System.out.println("Doctor deleted with ID: " + doctorId);
+        } else {
+            System.out.println("No doctor found with ID: " + doctorId);
+        }
     }
 
     /**
@@ -60,6 +83,10 @@ public class MedicationTrackingSystem {
      * @param medication The medication to add.
      */
     public void addMedication(Medication medication) {
+        if (medication == null) {
+            System.out.println("Invalid medication details.");
+            return;
+        }
         medications.add(medication);
         System.out.println("Medication added: " + medication.getName());
     }
@@ -69,9 +96,16 @@ public class MedicationTrackingSystem {
      * @param medicationId The ID of the medication to delete.
      */
     public void deleteMedication(String medicationId) {
-        // Loop through the list and remove the medication with the matching ID
-        medications.removeIf(medication -> medication.getId().equals(medicationId));
-        System.out.println("Medication deleted with ID: " + medicationId);
+        if (medicationId == null || medicationId.trim().isEmpty()) {
+            System.out.println("Invalid medication ID.");
+            return;
+        }
+        boolean removed = medications.removeIf(medication -> medication.getId().equals(medicationId));
+        if (removed) {
+            System.out.println("Medication deleted with ID: " + medicationId);
+        } else {
+            System.out.println("No medication found with ID: " + medicationId);
+        }
     }
 
     /**
@@ -79,8 +113,12 @@ public class MedicationTrackingSystem {
      */
     public void displayAllPatients() {
         System.out.println("\n=== All Patients ===");
-        for (Patient patient : patients) {
-            System.out.println(patient);
+        if (patients.isEmpty()) {
+            System.out.println("No patients found.");
+        } else {
+            for (Patient patient : patients) {
+                System.out.println(patient);
+            }
         }
     }
 
@@ -89,8 +127,12 @@ public class MedicationTrackingSystem {
      */
     public void displayAllDoctors() {
         System.out.println("\n=== All Doctors ===");
-        for (Doctor doctor : doctors) {
-            System.out.println(doctor);
+        if (doctors.isEmpty()) {
+            System.out.println("No doctors found.");
+        } else {
+            for (Doctor doctor : doctors) {
+                System.out.println(doctor);
+            }
         }
     }
 
@@ -99,8 +141,12 @@ public class MedicationTrackingSystem {
      */
     public void displayAllMedications() {
         System.out.println("\n=== All Medications ===");
-        for (Medication medication : medications) {
-            System.out.println(medication);
+        if (medications.isEmpty()) {
+            System.out.println("No medications found.");
+        } else {
+            for (Medication medication : medications) {
+                System.out.println(medication);
+            }
         }
     }
 
@@ -110,6 +156,10 @@ public class MedicationTrackingSystem {
      */
     public void searchPatientByName(String name) {
         System.out.println("\n=== Search Results for Patients ===");
+        if (name == null || name.trim().isEmpty()) {
+            System.out.println("Invalid patient name.");
+            return;
+        }
         boolean found = false;
         for (Patient patient : patients) {
             if (patient.getName().toLowerCase().contains(name.toLowerCase())) {
@@ -128,6 +178,10 @@ public class MedicationTrackingSystem {
      */
     public void searchDoctorByName(String name) {
         System.out.println("\n=== Search Results for Doctors ===");
+        if (name == null || name.trim().isEmpty()) {
+            System.out.println("Invalid doctor name.");
+            return;
+        }
         boolean found = false;
         for (Doctor doctor : doctors) {
             if (doctor.getName().toLowerCase().contains(name.toLowerCase())) {
@@ -146,6 +200,10 @@ public class MedicationTrackingSystem {
      */
     public void searchMedicationByName(String name) {
         System.out.println("\n=== Search Results for Medications ===");
+        if (name == null || name.trim().isEmpty()) {
+            System.out.println("Invalid medication name.");
+            return;
+        }
         boolean found = false;
         for (Medication medication : medications) {
             if (medication.getName().toLowerCase().contains(name.toLowerCase())) {
