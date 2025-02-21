@@ -107,11 +107,13 @@ public class Menu {
         String id = scanner.nextLine();
         System.out.print("Enter Patient Name: ");
         String name = scanner.nextLine();
+        System.out.print("Enter Patient Age: ");
+        int age = Integer.parseInt(scanner.nextLine());
         System.out.print("Enter Patient Phone Number: ");
         String phoneNumber = scanner.nextLine();
         
         // Creating Patient object and passing it to the system
-        Patient patient = new Patient(id, name, phoneNumber);
+        Patient patient = new Patient(id, name, age, phoneNumber);
         trackingSystem.addPatient(patient);
         System.out.println("Patient added successfully!");
     }
@@ -163,8 +165,8 @@ public class Menu {
         String id = scanner.nextLine();
         System.out.print("Enter Medication Name: ");
         String name = scanner.nextLine();
-        System.out.print("Enter Dosage: ");
-        String dosage = scanner.nextLine();
+        System.out.print("Enter Dosage (in mg): ");
+        int dosage = Integer.parseInt(scanner.nextLine());
         System.out.print("Enter Quantity in Stock: ");
         int quantity = Integer.parseInt(scanner.nextLine());
         
@@ -205,11 +207,34 @@ public class Menu {
      * Displays all medications.
      */
     private void viewAllMedications() {
-<<<<<<< HEAD
-        System.out.println("\n=== All 
-=======
         System.out.println("\n=== All Medications ===");
         trackingSystem.displayAllMedications();
     }
+
+    /**
+     * Searches for a patient by name.
+     */
+    private void searchPatient() {
+        System.out.print("Enter Patient Name to search: ");
+        String name = scanner.nextLine();
+        trackingSystem.searchPatientByName(name);
+    }
+
+    /**
+     * Searches for a doctor by name.
+     */
+    private void searchDoctor() {
+        System.out.print("Enter Doctor Name to search: ");
+        String name = scanner.nextLine();
+        trackingSystem.searchDoctorByName(name);
+    }
+
+    /**
+     * Searches for a medication by name.
+     */
+    private void searchMedication() {
+        System.out.print("Enter Medication Name to search: ");
+        String name = scanner.nextLine();
+        trackingSystem.searchMedicationByName(name);
+    }
 }
->>>>>>> 462a63d (WIP: Temporary commit before rebase)
