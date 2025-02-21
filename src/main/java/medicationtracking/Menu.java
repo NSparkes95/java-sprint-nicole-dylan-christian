@@ -3,10 +3,10 @@ package medicationtracking;
 import java.util.Scanner;
 
 /**
- * EmptyMenu class displays a console-based menu for the Medication Tracking System.
+ * Menu class displays a console-based menu for the Medication Tracking System.
  * It allows users to add, delete, view, and search patients, doctors, and medications.
  */
-public class EmptyMenu {
+public class Menu {
 
     // Creating an instance of MedicationTrackingSystem to manage the entities
     private MedicationTrackingSystem trackingSystem;
@@ -15,7 +15,7 @@ public class EmptyMenu {
     /**
      * Constructor initializes the MedicationTrackingSystem and Scanner for user input.
      */
-    public EmptyMenu() {
+    public Menu() {
         trackingSystem = new MedicationTrackingSystem();
         scanner = new Scanner(System.in);
     }
@@ -24,7 +24,7 @@ public class EmptyMenu {
      * Main method to launch the Medication Tracking System menu.
      */
     public static void main(String[] args) {
-        EmptyMenu menu = new EmptyMenu();
+        Menu menu = new Menu();
         menu.displayMenu();
     }
 
@@ -110,7 +110,9 @@ public class EmptyMenu {
         System.out.print("Enter Patient Phone Number: ");
         String phoneNumber = scanner.nextLine();
         
-        trackingSystem.addPatient(id, name, phoneNumber);
+        // Creating Patient object and passing it to the system
+        Patient patient = new Patient(id, name, phoneNumber);
+        trackingSystem.addPatient(patient);
         System.out.println("Patient added successfully!");
     }
 
@@ -136,7 +138,9 @@ public class EmptyMenu {
         System.out.print("Enter Doctor Specialization: ");
         String specialization = scanner.nextLine();
         
-        trackingSystem.addDoctor(id, name, specialization);
+        // Creating Doctor object and passing it to the system
+        Doctor doctor = new Doctor(id, name, specialization);
+        trackingSystem.addDoctor(doctor);
         System.out.println("Doctor added successfully!");
     }
 
@@ -164,7 +168,9 @@ public class EmptyMenu {
         System.out.print("Enter Quantity in Stock: ");
         int quantity = Integer.parseInt(scanner.nextLine());
         
-        trackingSystem.addMedication(id, name, dosage, quantity);
+        // Creating Medication object and passing it to the system
+        Medication medication = new Medication(id, name, dosage, quantity);
+        trackingSystem.addMedication(medication);
         System.out.println("Medication added successfully!");
     }
 
@@ -199,8 +205,11 @@ public class EmptyMenu {
      * Displays all medications.
      */
     private void viewAllMedications() {
+<<<<<<< HEAD
+        System.out.println("\n=== All 
+=======
         System.out.println("\n=== All Medications ===");
         trackingSystem.displayAllMedications();
     }
 }
-
+>>>>>>> 462a63d (WIP: Temporary commit before rebase)
