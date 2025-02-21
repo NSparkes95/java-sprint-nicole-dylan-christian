@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /**
  * Menu class displays a console-based menu for the Medication Tracking System.
- * It allows users to add, delete, view, and search patients, doctors, medications, and prescriptions.
+ * It allows users to add, delete, edit, view, and search patients, doctors, medications, and prescriptions.
  */
 public class Menu {
 
@@ -38,82 +38,56 @@ public class Menu {
             System.out.println("\n=== Medication Tracking System ===");
             System.out.println("1. Add Patient");
             System.out.println("2. Delete Patient");
-            System.out.println("3. Add Doctor");
-            System.out.println("4. Delete Doctor");
-            System.out.println("5. Add Medication");
-            System.out.println("6. Delete Medication");
-            System.out.println("7. View All Patients");
+            System.out.println("3. View All Patients");
+            System.out.println("4. Search Patient by Name");
+            System.out.println("5. Edit Patient");
+            System.out.println("6. Add Doctor");
+            System.out.println("7. Delete Doctor");
             System.out.println("8. View All Doctors");
-            System.out.println("9. View All Medications");
-            System.out.println("10. Search Patient by Name");
-            System.out.println("11. Search Doctor by Name");
-            System.out.println("12. Search Medication by Name");
-            System.out.println("13. Add Prescription");
-            System.out.println("14. Delete Prescription");
-            System.out.println("15. View All Prescriptions");
+            System.out.println("9. Search Doctor by Name");
+            System.out.println("10. Edit Doctor");
+            System.out.println("11. Add Medication");
+            System.out.println("12. Delete Medication");
+            System.out.println("13. View All Medications");
+            System.out.println("14. Search Medication by Name");
+            System.out.println("15. Edit Medication");
+            System.out.println("16. Add Prescription");
+            System.out.println("17. Delete Prescription");
+            System.out.println("18. View All Prescriptions");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             
             choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
-                case 1:
-                    addPatient();
-                    break;
-                case 2:
-                    deletePatient();
-                    break;
-                case 3:
-                    addDoctor();
-                    break;
-                case 4:
-                    deleteDoctor();
-                    break;
-                case 5:
-                    addMedication();
-                    break;
-                case 6:
-                    deleteMedication();
-                    break;
-                case 7:
-                    viewAllPatients();
-                    break;
-                case 8:
-                    viewAllDoctors();
-                    break;
-                case 9:
-                    viewAllMedications();
-                    break;
-                case 10:
-                    searchPatient();
-                    break;
-                case 11:
-                    searchDoctor();
-                    break;
-                case 12:
-                    searchMedication();
-                    break;
-                case 13:
-                    addPrescription();  
-                    break;
-                case 14:
-                    deletePrescription();  
-                    break;
-                case 15:
-                    viewAllPrescriptions();  
-                    break;
-                case 0:
-                    System.out.println("Exiting Medication Tracking System...");
-                    break;
-                default:
-                    System.out.println("Invalid choice! Please try again.");
+                case 1 -> addPatient();
+                case 2 -> deletePatient();
+                case 3 -> viewAllPatients();
+                case 4 -> searchPatient();
+                case 5 -> editPatient();
+                case 6 -> addDoctor();
+                case 7 -> deleteDoctor();
+                case 8 -> viewAllDoctors();
+                case 9 -> searchDoctor();
+                case 10 -> editDoctor();
+                case 11 -> addMedication();
+                case 12 -> deleteMedication();
+                case 13 -> viewAllMedications();
+                case 14 -> searchMedication();
+                case 15 -> editMedication();
+                case 16 -> addPrescription();
+                case 17 -> deletePrescription();
+                case 18 -> viewAllPrescriptions();
+                case 0 -> System.out.println("Exiting Medication Tracking System...");
+                default -> System.out.println("Invalid choice! Please try again.");
             }
         } while (choice != 0);
     }
 
-    /**
-     * Adds a new patient by getting input from the user.
-     */
+    // ============================================================
+    // === Patient Menu Methods ===
+    // ============================================================
+
     private void addPatient() {
         System.out.print("Enter Patient ID: ");
         String id = scanner.nextLine();
@@ -123,26 +97,43 @@ public class Menu {
         int age = Integer.parseInt(scanner.nextLine());
         System.out.print("Enter Patient Phone Number: ");
         String phoneNumber = scanner.nextLine();
-        
+
         Patient patient = new Patient(id, name, age, phoneNumber);
         trackingSystem.addPatient(patient);
-        System.out.println("Patient added successfully!");
     }
 
-    /**
-     * Deletes a patient by ID.
-     */
     private void deletePatient() {
         System.out.print("Enter Patient ID to delete: ");
         String id = scanner.nextLine();
-        
         trackingSystem.deletePatient(id);
-        System.out.println("Patient deleted successfully!");
     }
 
-    /**
-     * Adds a new doctor by getting input from the user.
-     */
+    private void viewAllPatients() {
+        trackingSystem.displayAllPatients();
+    }
+
+    private void searchPatient() {
+        System.out.print("Enter Patient Name to search: ");
+        String name = scanner.nextLine();
+        trackingSystem.searchPatientByName(name);
+    }
+
+    private void editPatient() {
+        System.out.print("Enter Patient ID to edit: ");
+        String patientId = scanner.nextLine();
+        System.out.print("Enter New Name: ");
+        String newName = scanner.nextLine();
+        System.out.print("Enter New Age: ");
+        int newAge = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter New Phone Number: ");
+        String newPhoneNumber = scanner.nextLine();
+        trackingSystem.editPatient(patientId, newName, newAge, newPhoneNumber);
+    }
+
+    // ============================================================
+    // === Doctor Menu Methods ===
+    // ============================================================
+
     private void addDoctor() {
         System.out.print("Enter Doctor ID: ");
         String id = scanner.nextLine();
@@ -150,26 +141,41 @@ public class Menu {
         String name = scanner.nextLine();
         System.out.print("Enter Doctor Specialization: ");
         String specialization = scanner.nextLine();
-        
+
         Doctor doctor = new Doctor(id, name, specialization);
         trackingSystem.addDoctor(doctor);
-        System.out.println("Doctor added successfully!");
     }
 
-    /**
-     * Deletes a doctor by ID.
-     */
     private void deleteDoctor() {
         System.out.print("Enter Doctor ID to delete: ");
         String id = scanner.nextLine();
-        
         trackingSystem.deleteDoctor(id);
-        System.out.println("Doctor deleted successfully!");
     }
 
-    /**
-     * Adds a new medication by getting input from the user.
-     */
+    private void viewAllDoctors() {
+        trackingSystem.displayAllDoctors();
+    }
+
+    private void searchDoctor() {
+        System.out.print("Enter Doctor Name to search: ");
+        String name = scanner.nextLine();
+        trackingSystem.searchDoctorByName(name);
+    }
+
+    private void editDoctor() {
+        System.out.print("Enter Doctor ID to edit: ");
+        String doctorId = scanner.nextLine();
+        System.out.print("Enter New Name: ");
+        String newName = scanner.nextLine();
+        System.out.print("Enter New Specialization: ");
+        String newSpecialization = scanner.nextLine();
+        trackingSystem.editDoctor(doctorId, newName, newSpecialization);
+    }
+
+    // ============================================================
+    // === Medication Menu Methods ===
+    // ============================================================
+
     private void addMedication() {
         System.out.print("Enter Medication ID: ");
         String id = scanner.nextLine();
@@ -179,110 +185,79 @@ public class Menu {
         int dosage = Integer.parseInt(scanner.nextLine());
         System.out.print("Enter Quantity in Stock: ");
         int quantity = Integer.parseInt(scanner.nextLine());
-        
+
         Medication medication = new Medication(id, name, dosage, quantity);
         trackingSystem.addMedication(medication);
-        System.out.println("Medication added successfully!");
     }
 
-    /**
-     * Adds a new prescription by getting input from the user.
-     */
-    private void addPrescription() {
-        System.out.print("Enter Prescription ID: ");
-        String prescriptionId = scanner.nextLine();
-        System.out.print("Enter Patient ID: ");
-        String patientId = scanner.nextLine();
-        System.out.print("Enter Doctor ID: ");
-        String doctorId = scanner.nextLine();
-        System.out.print("Enter Medication ID: ");
-        String medicationId = scanner.nextLine();
-        System.out.print("Enter Quantity: ");
-        int quantity = Integer.parseInt(scanner.nextLine());
-        System.out.print("Enter Instructions: ");
-        String instructions = scanner.nextLine();
-
-        // Creating Prescription object and passing it to the system
-        Prescription prescription = new Prescription(prescriptionId, patientId, doctorId, medicationId, quantity, instructions);
-        trackingSystem.addPrescription(prescription);
-        System.out.println("Prescription added successfully!");
-    }
-
-    /**
-     * Deletes a prescription by ID.
-     */
-    private void deletePrescription() {
-        System.out.print("Enter Prescription ID to delete: ");
-        String prescriptionId = scanner.nextLine();
-        
-        trackingSystem.deletePrescription(prescriptionId);
-    }
-
-    /**
-     * Displays all prescriptions.
-     */
-    private void viewAllPrescriptions() {
-        trackingSystem.displayAllPrescriptions();
-    }
-
-        /**
-     * Deletes a medication by ID.
-     */
     private void deleteMedication() {
         System.out.print("Enter Medication ID to delete: ");
         String id = scanner.nextLine();
         trackingSystem.deleteMedication(id);
-        System.out.println("Medication deleted successfully!");
     }
 
-    /**
-     * Displays all patients.
-     */
-    private void viewAllPatients() {
-        System.out.println("\n=== All Patients ===");
-        trackingSystem.displayAllPatients();
-    }
-
-    /**
-     * Displays all doctors.
-     */
-    private void viewAllDoctors() {
-        System.out.println("\n=== All Doctors ===");
-        trackingSystem.displayAllDoctors();
-    }
-
-    /**
-     * Displays all medications.
-     */
     private void viewAllMedications() {
-        System.out.println("\n=== All Medications ===");
         trackingSystem.displayAllMedications();
     }
 
-    /**
-     * Searches for a patient by name.
-     */
-    private void searchPatient() {
-        System.out.print("Enter Patient Name to search: ");
-        String name = scanner.nextLine();
-        trackingSystem.searchPatientByName(name);
-    }
-
-    /**
-     * Searches for a doctor by name.
-     */
-    private void searchDoctor() {
-        System.out.print("Enter Doctor Name to search: ");
-        String name = scanner.nextLine();
-        trackingSystem.searchDoctorByName(name);
-    }
-
-    /**
-     * Searches for a medication by name.
-     */
     private void searchMedication() {
         System.out.print("Enter Medication Name to search: ");
         String name = scanner.nextLine();
         trackingSystem.searchMedicationByName(name);
     }
+
+    private void editMedication() {
+        System.out.print("Enter Medication ID to edit: ");
+        String medicationId = scanner.nextLine();
+        System.out.print("Enter New Name: ");
+        String newName = scanner.nextLine();
+        System.out.print("Enter New Dosage (in mg): ");
+        int newDosage = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter New Quantity: ");
+        int newQuantity = Integer.parseInt(scanner.nextLine());
+        trackingSystem.editMedication(medicationId, newName, newDosage, newQuantity);
+    }
+
+    // ============================================================
+// === Prescription Menu Methods ===
+// ============================================================
+
+/**
+ * Adds a new prescription by getting input from the user.
+ */
+private void addPrescription() {
+    System.out.print("Enter Prescription ID: ");
+    String prescriptionId = scanner.nextLine();
+    System.out.print("Enter Patient ID: ");
+    String patientId = scanner.nextLine();
+    System.out.print("Enter Doctor ID: ");
+    String doctorId = scanner.nextLine();
+    System.out.print("Enter Medication ID: ");
+    String medicationId = scanner.nextLine();
+    System.out.print("Enter Quantity: ");
+    int quantity = Integer.parseInt(scanner.nextLine());
+    System.out.print("Enter Instructions: ");
+    String instructions = scanner.nextLine();
+
+    Prescription prescription = new Prescription(prescriptionId, patientId, doctorId, medicationId, quantity, instructions);
+    trackingSystem.addPrescription(prescription);
+    System.out.println("Prescription added successfully!");
+}
+
+/**
+ * Deletes a prescription by ID.
+ */
+private void deletePrescription() {
+    System.out.print("Enter Prescription ID to delete: ");
+    String prescriptionId = scanner.nextLine();
+    trackingSystem.deletePrescription(prescriptionId);
+    System.out.println("Prescription deleted successfully!");
+}
+
+/**
+ * Displays all prescriptions.
+ */
+private void viewAllPrescriptions() {
+    trackingSystem.displayAllPrescriptions();
+}
 }

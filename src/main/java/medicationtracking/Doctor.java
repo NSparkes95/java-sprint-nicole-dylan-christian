@@ -55,6 +55,17 @@ public class Doctor {
     }
 
     /**
+     * Setter method to update doctor's name.
+     * @param name - New name for the doctor
+     */
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Doctor name cannot be empty.");
+        }
+        this.name = name;
+    }
+
+    /**
      * Getter method for doctor's specialization.
      * @return Doctor's area of specialization
      */

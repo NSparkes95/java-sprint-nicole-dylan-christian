@@ -70,10 +70,32 @@ public class Prescription {
     }
 
     /**
+     * Setter for Quantity.
+     * @param quantity - The new quantity for the prescription.
+     */
+    public void setQuantity(int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be a positive value.");
+        }
+        this.quantity = quantity;
+    }
+
+    /**
      * Getter for Instructions.
      */
     public String getInstructions() {
         return instructions;
+    }
+
+    /**
+     * Setter for Instructions.
+     * @param instructions - The new instructions for taking the medication.
+     */
+    public void setInstructions(String instructions) {
+        if (instructions == null || instructions.trim().isEmpty()) {
+            throw new IllegalArgumentException("Instructions cannot be null or empty.");
+        }
+        this.instructions = instructions;
     }
 
     /**

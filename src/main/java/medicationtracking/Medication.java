@@ -63,11 +63,33 @@ public class Medication {
     }
 
     /**
+     * Setter method to update medication name.
+     * @param name - New name for the medication
+     */
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Medication name cannot be empty.");
+        }
+        this.name = name;
+    }
+
+    /**
      * Getter method for medication dosage.
      * @return Dosage of the medication in mg
      */
     public int getDosage() {
         return dosage;
+    }
+
+    /**
+     * Setter method to update medication dosage.
+     * @param dosage - New dosage value (must be positive)
+     */
+    public void setDosage(int dosage) {
+        if (dosage <= 0) {
+            throw new IllegalArgumentException("Dosage must be a positive value.");
+        }
+        this.dosage = dosage;
     }
 
     /**
