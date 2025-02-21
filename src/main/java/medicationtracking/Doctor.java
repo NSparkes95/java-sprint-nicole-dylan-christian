@@ -1,8 +1,8 @@
 package medicationtracking;
 
 /**
- * Doctor class represents a doctor in the pharmacy system.
- * It stores the doctor's ID, full name, and area of specialization.
+ * Doctor class represents a doctor in the medication tracking system.
+ * It contains attributes for doctor's ID, name, and specialization.
  */
 public class Doctor {
     // Unique identifier for the doctor
@@ -16,59 +16,66 @@ public class Doctor {
 
     /**
      * Constructor to initialize doctor details.
+     * It includes input validation to ensure that all fields are not empty.
      * 
-     * @param id             Unique identifier for the doctor.
-     * @param name           Full name of the doctor.
-     * @param specialization Area of specialization (e.g., Cardiology, Neurology).
+     * @param id - Unique identifier for the doctor
+     * @param name - Doctor's full name
+     * @param specialization - Doctor's area of specialization
      */
     public Doctor(String id, String name, String specialization) {
-        // Input validation to ensure no null or empty values
-        if (id == null || id.isEmpty()) {
-            throw new IllegalArgumentException("Doctor ID cannot be null or empty.");
+        if (id == null || id.trim().isEmpty()) {
+            throw new IllegalArgumentException("Doctor ID cannot be empty.");
         }
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Doctor name cannot be null or empty.");
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Doctor name cannot be empty.");
         }
-        if (specialization == null || specialization.isEmpty()) {
-            throw new IllegalArgumentException("Specialization cannot be null or empty.");
+        if (specialization == null || specialization.trim().isEmpty()) {
+            throw new IllegalArgumentException("Specialization cannot be empty.");
         }
-        
+
         this.id = id;
         this.name = name;
         this.specialization = specialization;
     }
 
     /**
-     * Gets the unique identifier of the doctor.
-     * 
-     * @return Doctor's ID.
+     * Getter method for doctor ID.
+     * @return Doctor's unique identifier
      */
     public String getId() {
         return id;
     }
 
     /**
-     * Gets the full name of the doctor.
-     * 
-     * @return Doctor's name.
+     * Getter method for doctor's full name.
+     * @return Doctor's name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Gets the specialization of the doctor.
-     * 
-     * @return Doctor's specialization.
+     * Getter method for doctor's specialization.
+     * @return Doctor's area of specialization
      */
     public String getSpecialization() {
         return specialization;
     }
 
     /**
-     * Returns a readable representation of the doctor object.
-     * 
-     * @return String representation of the doctor's details.
+     * Setter method to update doctor's specialization.
+     * @param specialization - New area of specialization
+     */
+    public void setSpecialization(String specialization) {
+        if (specialization == null || specialization.trim().isEmpty()) {
+            throw new IllegalArgumentException("Specialization cannot be empty.");
+        }
+        this.specialization = specialization;
+    }
+
+    /**
+     * Override toString() method to display doctor details in a readable format.
+     * @return Formatted string with doctor's details
      */
     @Override
     public String toString() {
