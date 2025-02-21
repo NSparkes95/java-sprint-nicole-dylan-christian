@@ -215,4 +215,70 @@ public class MedicationTrackingSystem {
             System.out.println("No medications found with the name: " + name);
         }
     }
-}
+
+    // List to store all prescriptions
+    private List<Prescription> prescriptions = new ArrayList<>();
+
+    /**
+     * Adds a new prescription to the system.
+     * @param prescription The prescription to add.
+     */
+    public void addPrescription(Prescription prescription) {
+        if (prescription == null) {
+            System.out.println("Invalid prescription details.");
+            return;
+        }
+        
+        // Check if patient, doctor, and medication exist
+        boolean patientExists = patients.stream().anyMatch(p -> p.getId().equals(prescription.getPatientId()));
+        boolean doctorExists = doctors.stream().anyMatch(d -> d.getId().equals(prescription.getDoctorId()));
+        boolean medicationExists = medications.stream().anyMatch(m -> m.getId().equals(prescription.getMedicationId()));
+        
+        if (!patientExists) {
+            System.out.println("No patient found with ID: " + prescription.getPatientId());
+            return;
+        }
+        if (!doctorExists) {
+            System.out.println("No doctor found with ID: " + prescription.getDoctorId());
+            return;
+        }
+        if (!medicationExists) {
+            System.out.println("No medication found with ID: " + prescription.getMedicationId());
+            return;
+        }
+        
+        prescriptions.add(prescription);
+        System.out.println("Prescription added successfully!");
+    }
+
+    /**
+     * Deletes a prescription by ID.
+     * @param prescriptionId The ID of the prescription to delete.
+     */
+    public void deletePrescription(String prescriptionId) {
+        if (prescriptionId == null || prescriptionId.trim().isEmpty()) {
+            System.out.println("Invalid prescription ID.");
+            return;
+        }
+        boolean removed = prescriptions.removeIf(prescription -> prescription.getPrescriptionId().equals(prescriptionId));
+        if (removed) {
+            System.out.println("Prescription deleted with ID: " + prescriptionId);
+        } else {
+            System.out.println("No prescription found with ID: " + prescriptionId);
+        }
+    }
+
+    /**
+     * Displays all prescriptions in the system.
+     */
+    public void displayAllPrescriptions() {
+        System.out.println("\n=== All Prescriptions ===");
+        if (prescriptions.isEmpty()) {
+            System.out.println("No prescriptions found.");
+        } else {
+            for (Prescription prescription : prescriptions) {
+                System.out.println(prescription);
+            }
+        }
+    } 
+    }
