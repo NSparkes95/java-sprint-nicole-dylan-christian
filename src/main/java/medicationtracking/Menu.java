@@ -60,28 +60,70 @@ public class Menu {
             choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
-                case 1 -> addPatient();
-                case 2 -> deletePatient();
-                case 3 -> viewAllPatients();
-                case 4 -> searchPatient();
-                case 5 -> editPatient();
-                case 6 -> addDoctor();
-                case 7 -> deleteDoctor();
-                case 8 -> viewAllDoctors();
-                case 9 -> searchDoctor();
-                case 10 -> editDoctor();
-                case 11 -> addMedication();
-                case 12 -> deleteMedication();
-                case 13 -> viewAllMedications();
-                case 14 -> searchMedication();
-                case 15 -> editMedication();
-                case 16 -> addPrescription();
-                case 17 -> deletePrescription();
-                case 18 -> viewAllPrescriptions();
-                case 0 -> System.out.println("Exiting Medication Tracking System...");
-                default -> System.out.println("Invalid choice! Please try again.");
+                case 1:
+                    addPatient();
+                    break;
+                case 2:
+                    deletePatient();
+                    break;
+                case 3:
+                    viewAllPatients();
+                    break;
+                case 4:
+                    searchPatient();
+                    break;
+                case 5:
+                    editPatient();
+                    break;
+                case 6:
+                    addDoctor();
+                    break;
+                case 7:
+                    deleteDoctor();
+                    break;
+                case 8:
+                    viewAllDoctors();
+                    break;
+                case 9:
+                    searchDoctor();
+                    break;
+                case 10:
+                    editDoctor();
+                    break;
+                case 11:
+                    addMedication();
+                    break;
+                case 12:
+                    deleteMedication();
+                    break;
+                case 13:
+                    viewAllMedications();
+                    break;
+                case 14:
+                    searchMedication();
+                    break;
+                case 15:
+                    editMedication();
+                    break;
+                case 16:
+                    addPrescription();
+                    break;
+                case 17:
+                    deletePrescription();
+                    break;
+                case 18:
+                    viewAllPrescriptions();
+                    break;
+                case 0:
+                    System.out.println("Exiting Medication Tracking System...");
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please try again.");
             }
+            
+        // Closing the while loop here
         } while (choice != 0);
+
     }
 
     // ============================================================
@@ -219,45 +261,36 @@ public class Menu {
     }
 
     // ============================================================
-// === Prescription Menu Methods ===
-// ============================================================
+    // === Prescription Menu Methods ===
+    // ============================================================
 
-/**
- * Adds a new prescription by getting input from the user.
- */
-private void addPrescription() {
-    System.out.print("Enter Prescription ID: ");
-    String prescriptionId = scanner.nextLine();
-    System.out.print("Enter Patient ID: ");
-    String patientId = scanner.nextLine();
-    System.out.print("Enter Doctor ID: ");
-    String doctorId = scanner.nextLine();
-    System.out.print("Enter Medication ID: ");
-    String medicationId = scanner.nextLine();
-    System.out.print("Enter Quantity: ");
-    int quantity = Integer.parseInt(scanner.nextLine());
-    System.out.print("Enter Instructions: ");
-    String instructions = scanner.nextLine();
+    private void addPrescription() {
+        System.out.print("Enter Prescription ID: ");
+        String prescriptionId = scanner.nextLine();
+        System.out.print("Enter Patient ID: ");
+        String patientId = scanner.nextLine();
+        System.out.print("Enter Doctor ID: ");
+        String doctorId = scanner.nextLine();
+        System.out.print("Enter Medication ID: ");
+        String medicationId = scanner.nextLine();
+        System.out.print("Enter Quantity: ");
+        int quantity = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter Instructions: ");
+        String instructions = scanner.nextLine();
 
-    Prescription prescription = new Prescription(prescriptionId, patientId, doctorId, medicationId, quantity, instructions);
-    trackingSystem.addPrescription(prescription);
-    System.out.println("Prescription added successfully!");
-}
+        Prescription prescription = new Prescription(prescriptionId, patientId, doctorId, medicationId, quantity, instructions);
+        trackingSystem.addPrescription(prescription);
+        System.out.println("Prescription added successfully!");
+    }
 
-/**
- * Deletes a prescription by ID.
- */
-private void deletePrescription() {
-    System.out.print("Enter Prescription ID to delete: ");
-    String prescriptionId = scanner.nextLine();
-    trackingSystem.deletePrescription(prescriptionId);
-    System.out.println("Prescription deleted successfully!");
-}
+    private void deletePrescription() {
+        System.out.print("Enter Prescription ID to delete: ");
+        String prescriptionId = scanner.nextLine();
+        trackingSystem.deletePrescription(prescriptionId);
+        System.out.println("Prescription deleted successfully!");
+    }
 
-/**
- * Displays all prescriptions.
- */
-private void viewAllPrescriptions() {
-    trackingSystem.displayAllPrescriptions();
-}
+    private void viewAllPrescriptions() {
+        trackingSystem.displayAllPrescriptions();
+    }
 }
