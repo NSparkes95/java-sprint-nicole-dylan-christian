@@ -21,6 +21,7 @@ public class Doctor {
      * @param id - Unique identifier for the doctor
      * @param name - Doctor's full name
      * @param specialization - Doctor's area of specialization
+     * @throws IllegalArgumentException if any parameter is empty or null
      */
     public Doctor(String id, String name, String specialization) {
         if (id == null || id.trim().isEmpty()) {
@@ -40,6 +41,7 @@ public class Doctor {
 
     /**
      * Getter method for doctor ID.
+     * 
      * @return Doctor's unique identifier
      */
     public String getId() {
@@ -48,6 +50,7 @@ public class Doctor {
 
     /**
      * Getter method for doctor's full name.
+     * 
      * @return Doctor's name
      */
     public String getName() {
@@ -56,7 +59,9 @@ public class Doctor {
 
     /**
      * Setter method to update doctor's name.
+     * 
      * @param name - New name for the doctor
+     * @throws IllegalArgumentException if the name is empty or null
      */
     public void setName(String name) {
         if (name == null || name.trim().isEmpty()) {
@@ -67,6 +72,7 @@ public class Doctor {
 
     /**
      * Getter method for doctor's specialization.
+     * 
      * @return Doctor's area of specialization
      */
     public String getSpecialization() {
@@ -75,7 +81,9 @@ public class Doctor {
 
     /**
      * Setter method to update doctor's specialization.
+     * 
      * @param specialization - New area of specialization
+     * @throws IllegalArgumentException if the specialization is empty or null
      */
     public void setSpecialization(String specialization) {
         if (specialization == null || specialization.trim().isEmpty()) {
@@ -86,6 +94,7 @@ public class Doctor {
 
     /**
      * Override toString() method to display doctor details in a readable format.
+     * 
      * @return Formatted string with doctor's details
      */
     @Override

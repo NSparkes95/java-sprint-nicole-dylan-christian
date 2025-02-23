@@ -25,6 +25,7 @@ public class Patient {
      * @param name Full name of the patient.
      * @param age Age of the patient (must be a positive number).
      * @param phoneNumber Contact number of the patient.
+     * @throws IllegalArgumentException if any of the input parameters are invalid.
      */
     public Patient(String id, String name, int age, String phoneNumber) {
         if (id == null || id.trim().isEmpty()) {
@@ -83,6 +84,7 @@ public class Patient {
      * Validates the new name before updating.
      * 
      * @param name The new full name for the patient.
+     * @throws IllegalArgumentException if the name is null or empty.
      */
     public void setName(String name) {
         if (name == null || name.trim().isEmpty()) {
@@ -96,6 +98,7 @@ public class Patient {
      * Validates the new age before updating.
      * 
      * @param age The new age for the patient.
+     * @throws IllegalArgumentException if the age is less than or equal to 0.
      */
     public void setAge(int age) {
         if (age <= 0) {
@@ -109,6 +112,7 @@ public class Patient {
      * Validates the new phone number before updating.
      * 
      * @param phoneNumber The new contact phone number for the patient.
+     * @throws IllegalArgumentException if the phone number is null or empty.
      */
     public void setPhoneNumber(String phoneNumber) {
         if (phoneNumber == null || phoneNumber.trim().isEmpty()) {

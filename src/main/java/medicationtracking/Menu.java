@@ -22,6 +22,7 @@ public class Menu {
 
     /**
      * Main method to launch the Medication Tracking System menu.
+     * @param args Command-line arguments
      */
     public static void main(String[] args) {
         Menu menu = new Menu();
@@ -33,7 +34,8 @@ public class Menu {
      */
     public void displayMenu() {
         int choice;
-    /*Medication Tracking System Start UP Menu */
+
+        /* Medication Tracking System Start UP Menu */
         do {
             System.out.println("\n=== Medication Tracking System ===");
             System.out.println("Welcome to the Medication Tracking System. Please make a choice below:");
@@ -68,7 +70,10 @@ public class Menu {
     
         } while (choice != 0);
     }
-    /* Patient Menu Displayed Options */
+
+    /**
+     * Displays the Patient Menu and handles user input.
+     */
     private void showPatientMenu() {
         int choice;
         
@@ -108,7 +113,10 @@ public class Menu {
     
         } while (choice != 0);
     }
-    /* Doctor Menu Displayed Options */
+
+    /**
+     * Displays the Doctor Menu and handles user input.
+     */
     private void showDoctorMenu() {
         int choice;
     
@@ -148,7 +156,10 @@ public class Menu {
     
         } while (choice != 0);
     }
-    /* Medication Menu Display Options */
+
+    /**
+     * Displays the Medication Menu and handles user input.
+     */
     private void showMedicationMenu() {
         int choice;
     
@@ -188,7 +199,10 @@ public class Menu {
     
         } while (choice != 0);
     }
-    /* Prescription Menu Display Options */
+
+    /**
+     * Displays the Prescription Menu and handles user input.
+     */
     private void showPrescriptionMenu() {
         int choice;
     
@@ -220,12 +234,14 @@ public class Menu {
     
         } while (choice != 0);
     }
-    
 
     // ============================================================
     // === Patient Menu Methods ===
     // ============================================================
 
+    /**
+     * Adds a new patient to the system.
+     */
     private void addPatient() {
         String id, name, phoneNumber;
         int age;
@@ -255,22 +271,34 @@ public class Menu {
         trackingSystem.addPatient(patient);
     }
 
+    /**
+     * Deletes a patient by ID.
+     */
     private void deletePatient() {
         System.out.print("Enter Patient ID to delete: ");
         String id = scanner.nextLine();
         trackingSystem.deletePatient(id);
     }
 
+    /**
+     * Displays all patients in the system.
+     */
     private void viewAllPatients() {
         trackingSystem.displayAllPatients();
     }
 
+    /**
+     * Searches for a patient by name.
+     */
     private void searchPatient() {
         System.out.print("Enter Patient Name to search: ");
         String name = scanner.nextLine();
         trackingSystem.searchPatientByName(name);
     }
 
+    /**
+     * Edits patient details.
+     */
     private void editPatient() {
         System.out.print("Enter Patient ID to edit: ");
         String patientId = scanner.nextLine();
@@ -300,6 +328,9 @@ public class Menu {
     // === Doctor Menu Methods ===
     // ============================================================
 
+    /**
+     * Adds a new doctor to the system.
+     */
     private void addDoctor() {
         System.out.print("Enter Doctor ID: ");
         String id = scanner.nextLine();
@@ -312,22 +343,34 @@ public class Menu {
         trackingSystem.addDoctor(doctor);
     }
 
+    /**
+     * Deletes a doctor by ID.
+     */
     private void deleteDoctor() {
         System.out.print("Enter Doctor ID to delete: ");
         String id = scanner.nextLine();
         trackingSystem.deleteDoctor(id);
     }
 
+    /**
+     * Displays all doctors in the system.
+     */
     private void viewAllDoctors() {
         trackingSystem.displayAllDoctors();
     }
 
+    /**
+     * Searches for a doctor by name.
+     */
     private void searchDoctor() {
         System.out.print("Enter Doctor Name to search: ");
         String name = scanner.nextLine();
         trackingSystem.searchDoctorByName(name);
     }
 
+    /**
+     * Edits doctor details.
+     */
     private void editDoctor() {
         System.out.print("Enter Doctor ID to edit: ");
         String doctorId = scanner.nextLine();
@@ -342,6 +385,9 @@ public class Menu {
     // === Medication Menu Methods ===
     // ============================================================
 
+    /**
+     * Adds a new medication to the system.
+     */
     private void addMedication() {
         System.out.print("Enter Medication ID: ");
         String id = scanner.nextLine();
@@ -379,22 +425,34 @@ public class Menu {
         trackingSystem.addMedication(medication);
     }
 
+    /**
+     * Deletes a medication by ID.
+     */
     private void deleteMedication() {
         System.out.print("Enter Medication ID to delete: ");
         String id = scanner.nextLine();
         trackingSystem.deleteMedication(id);
     }
 
+    /**
+     * Displays all medications in the system.
+     */
     private void viewAllMedications() {
         trackingSystem.displayAllMedications();
     }
 
+    /**
+     * Searches for a medication by name.
+     */
     private void searchMedication() {
         System.out.print("Enter Medication Name to search: ");
         String name = scanner.nextLine();
         trackingSystem.searchMedicationByName(name);
     }
 
+    /**
+     * Edits medication details.
+     */
     private void editMedication() {
         System.out.print("Enter Medication ID to edit: ");
         String medicationId = scanner.nextLine();
@@ -435,6 +493,9 @@ public class Menu {
     // === Prescription Menu Methods ===
     // ============================================================
 
+    /**
+     * Adds a new prescription to the system.
+     */
     private void addPrescription() {
         System.out.print("Enter Prescription ID: ");
         String prescriptionId = scanner.nextLine();
@@ -454,6 +515,9 @@ public class Menu {
         System.out.println("Prescription added successfully!");
     }
 
+    /**
+     * Deletes a prescription by ID.
+     */
     private void deletePrescription() {
         System.out.print("Enter Prescription ID to delete: ");
         String prescriptionId = scanner.nextLine();
@@ -461,6 +525,9 @@ public class Menu {
         System.out.println("Prescription deleted successfully!");
     }
 
+    /**
+     * Displays all prescriptions in the system.
+     */
     private void viewAllPrescriptions() {
         trackingSystem.displayAllPrescriptions();
     }

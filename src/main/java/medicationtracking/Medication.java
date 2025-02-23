@@ -25,6 +25,7 @@ public class Medication {
      * @param name - Name of the medication
      * @param dosage - Dosage of the medication in mg (must be positive)
      * @param quantityInStock - Quantity available in stock (must be positive)
+     * @throws IllegalArgumentException if any parameter is invalid
      */
     public Medication(String id, String name, int dosage, int quantityInStock) {
         if (id == null || id.trim().isEmpty()) {
@@ -65,6 +66,7 @@ public class Medication {
     /**
      * Setter method to update medication name.
      * @param name - New name for the medication
+     * @throws IllegalArgumentException if the name is empty or null
      */
     public void setName(String name) {
         if (name == null || name.trim().isEmpty()) {
@@ -84,6 +86,7 @@ public class Medication {
     /**
      * Setter method to update medication dosage.
      * @param dosage - New dosage value (must be positive)
+     * @throws IllegalArgumentException if the dosage is less than or equal to 0
      */
     public void setDosage(int dosage) {
         if (dosage <= 0) {
@@ -103,6 +106,7 @@ public class Medication {
     /**
      * Setter method to update quantity in stock.
      * @param quantityInStock - New quantity in stock (must be positive)
+     * @throws IllegalArgumentException if the quantity is negative
      */
     public void setQuantityInStock(int quantityInStock) {
         if (quantityInStock < 0) {
