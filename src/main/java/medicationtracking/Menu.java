@@ -33,32 +33,57 @@ public class Menu {
      */
     public void displayMenu() {
         int choice;
-
+    /*Medication Tracking System Start UP Menu */
         do {
             System.out.println("\n=== Medication Tracking System ===");
+            System.out.println("Welcome to the Medication Tracking System. Please make a choice below:");
+            System.out.println("1. Patients");
+            System.out.println("2. Doctors");
+            System.out.println("3. Medications");
+            System.out.println("4. Prescriptions");
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice: ");
+            
+            choice = Integer.parseInt(scanner.nextLine());
+    
+            switch (choice) {
+                case 1:
+                    showPatientMenu();
+                    break;
+                case 2:
+                    showDoctorMenu();
+                    break;
+                case 3:
+                    showMedicationMenu();
+                    break;
+                case 4:
+                    showPrescriptionMenu();
+                    break;
+                case 0:
+                    System.out.println("Exiting Medication Tracking System...");
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+    
+        } while (choice != 0);
+    }
+    /* Patient Menu Displayed Options */
+    private void showPatientMenu() {
+        int choice;
+        
+        do {
+            System.out.println("\n=== Patient Management ===");
             System.out.println("1. Add Patient");
             System.out.println("2. Delete Patient");
             System.out.println("3. View All Patients");
             System.out.println("4. Search Patient by Name");
             System.out.println("5. Edit Patient");
-            System.out.println("6. Add Doctor");
-            System.out.println("7. Delete Doctor");
-            System.out.println("8. View All Doctors");
-            System.out.println("9. Search Doctor by Name");
-            System.out.println("10. Edit Doctor");
-            System.out.println("11. Add Medication");
-            System.out.println("12. Delete Medication");
-            System.out.println("13. View All Medications");
-            System.out.println("14. Search Medication by Name");
-            System.out.println("15. Edit Medication");
-            System.out.println("16. Add Prescription");
-            System.out.println("17. Delete Prescription");
-            System.out.println("18. View All Prescriptions");
-            System.out.println("0. Exit");
+            System.out.println("0. Back to Main Menu");
             System.out.print("Enter your choice: ");
             
             choice = Integer.parseInt(scanner.nextLine());
-
+    
             switch (choice) {
                 case 1:
                     addPatient();
@@ -75,70 +100,156 @@ public class Menu {
                 case 5:
                     editPatient();
                     break;
-                case 6:
-                    addDoctor();
-                    break;
-                case 7:
-                    deleteDoctor();
-                    break;
-                case 8:
-                    viewAllDoctors();
-                    break;
-                case 9:
-                    searchDoctor();
-                    break;
-                case 10:
-                    editDoctor();
-                    break;
-                case 11:
-                    addMedication();
-                    break;
-                case 12:
-                    deleteMedication();
-                    break;
-                case 13:
-                    viewAllMedications();
-                    break;
-                case 14:
-                    searchMedication();
-                    break;
-                case 15:
-                    editMedication();
-                    break;
-                case 16:
-                    addPrescription();
-                    break;
-                case 17:
-                    deletePrescription();
-                    break;
-                case 18:
-                    viewAllPrescriptions();
-                    break;
                 case 0:
-                    System.out.println("Exiting Medication Tracking System...");
                     break;
                 default:
                     System.out.println("Invalid choice! Please try again.");
             }
-            
-        // Closing the while loop here
+    
         } while (choice != 0);
-
     }
+    /* Doctor Menu Displayed Options */
+    private void showDoctorMenu() {
+        int choice;
+    
+        do {
+            System.out.println("\n=== Doctor Management ===");
+            System.out.println("1. Add Doctor");
+            System.out.println("2. Delete Doctor");
+            System.out.println("3. View All Doctors");
+            System.out.println("4. Search Doctor by Name");
+            System.out.println("5. Edit Doctor");
+            System.out.println("0. Back to Main Menu");
+            System.out.print("Enter your choice: ");
+            
+            choice = Integer.parseInt(scanner.nextLine());
+    
+            switch (choice) {
+                case 1:
+                    addDoctor();
+                    break;
+                case 2:
+                    deleteDoctor();
+                    break;
+                case 3:
+                    viewAllDoctors();
+                    break;
+                case 4:
+                    searchDoctor();
+                    break;
+                case 5:
+                    editDoctor();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+    
+        } while (choice != 0);
+    }
+    /* Medication Menu Display Options */
+    private void showMedicationMenu() {
+        int choice;
+    
+        do {
+            System.out.println("\n=== Medication Management ===");
+            System.out.println("1. Add Medication");
+            System.out.println("2. Delete Medication");
+            System.out.println("3. View All Medications");
+            System.out.println("4. Search Medication by Name");
+            System.out.println("5. Edit Medication");
+            System.out.println("0. Back to Main Menu");
+            System.out.print("Enter your choice: ");
+            
+            choice = Integer.parseInt(scanner.nextLine());
+    
+            switch (choice) {
+                case 1:
+                    addMedication();
+                    break;
+                case 2:
+                    deleteMedication();
+                    break;
+                case 3:
+                    viewAllMedications();
+                    break;
+                case 4:
+                    searchMedication();
+                    break;
+                case 5:
+                    editMedication();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+    
+        } while (choice != 0);
+    }
+    /* Prescription Menu Display Options */
+    private void showPrescriptionMenu() {
+        int choice;
+    
+        do {
+            System.out.println("\n=== Prescription Management ===");
+            System.out.println("1. Add Prescription");
+            System.out.println("2. Delete Prescription");
+            System.out.println("3. View All Prescriptions");
+            System.out.println("0. Back to Main Menu");
+            System.out.print("Enter your choice: ");
+            
+            choice = Integer.parseInt(scanner.nextLine());
+    
+            switch (choice) {
+                case 1:
+                    addPrescription();
+                    break;
+                case 2:
+                    deletePrescription();
+                    break;
+                case 3:
+                    viewAllPrescriptions();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+    
+        } while (choice != 0);
+    }
+    
 
     // ============================================================
     // === Patient Menu Methods ===
     // ============================================================
 
     private void addPatient() {
+        String id, name, phoneNumber;
+        int age;
+
         System.out.print("Enter Patient ID: ");
-        String id = scanner.nextLine();
+        id = scanner.nextLine();
         System.out.print("Enter Patient Name: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter Patient Age: ");
-        int age = Integer.parseInt(scanner.nextLine());
+        name = scanner.nextLine();
+        
+        while (true) {
+            System.out.print("Enter Patient Age: ");
+            if (scanner.hasNextInt()) {
+                age = scanner.nextInt();
+                scanner.nextLine(); // consume the newline character
+                if (age > 0) break;
+                else System.out.println("Age must be greater than 0.");
+            } else {
+                System.out.println("Invalid input. Please enter a valid age.");
+                scanner.next(); // consume the invalid input
+            }
+        }
+
         System.out.print("Enter Patient Phone Number: ");
-        String phoneNumber = scanner.nextLine();
+        phoneNumber = scanner.nextLine();
 
         Patient patient = new Patient(id, name, age, phoneNumber);
         trackingSystem.addPatient(patient);
@@ -165,8 +276,21 @@ public class Menu {
         String patientId = scanner.nextLine();
         System.out.print("Enter New Name: ");
         String newName = scanner.nextLine();
-        System.out.print("Enter New Age: ");
-        int newAge = Integer.parseInt(scanner.nextLine());
+        
+        int newAge;
+        while (true) {
+            System.out.print("Enter New Age: ");
+            if (scanner.hasNextInt()) {
+                newAge = scanner.nextInt();
+                scanner.nextLine(); // consume the newline character
+                if (newAge > 0) break;
+                else System.out.println("Age must be greater than 0.");
+            } else {
+                System.out.println("Invalid input. Please enter a valid age.");
+                scanner.next(); // consume the invalid input
+            }
+        }
+
         System.out.print("Enter New Phone Number: ");
         String newPhoneNumber = scanner.nextLine();
         trackingSystem.editPatient(patientId, newName, newAge, newPhoneNumber);
@@ -223,10 +347,33 @@ public class Menu {
         String id = scanner.nextLine();
         System.out.print("Enter Medication Name: ");
         String name = scanner.nextLine();
-        System.out.print("Enter Dosage (in mg): ");
-        int dosage = Integer.parseInt(scanner.nextLine());
-        System.out.print("Enter Quantity in Stock: ");
-        int quantity = Integer.parseInt(scanner.nextLine());
+        
+        int dosage, quantity;
+        while (true) {
+            System.out.print("Enter Dosage (in mg): ");
+            if (scanner.hasNextInt()) {
+                dosage = scanner.nextInt();
+                scanner.nextLine(); // consume the newline character
+                if (dosage > 0) break;
+                else System.out.println("Dosage must be greater than 0.");
+            } else {
+                System.out.println("Invalid input. Please enter a valid dosage.");
+                scanner.next(); // consume the invalid input
+            }
+        }
+        
+        while (true) {
+            System.out.print("Enter Quantity in Stock: ");
+            if (scanner.hasNextInt()) {
+                quantity = scanner.nextInt();
+                scanner.nextLine(); // consume the newline character
+                if (quantity >= 0) break;
+                else System.out.println("Quantity must be greater than or equal to 0.");
+            } else {
+                System.out.println("Invalid input. Please enter a valid quantity.");
+                scanner.next(); // consume the invalid input
+            }
+        }
 
         Medication medication = new Medication(id, name, dosage, quantity);
         trackingSystem.addMedication(medication);
@@ -253,10 +400,34 @@ public class Menu {
         String medicationId = scanner.nextLine();
         System.out.print("Enter New Name: ");
         String newName = scanner.nextLine();
-        System.out.print("Enter New Dosage (in mg): ");
-        int newDosage = Integer.parseInt(scanner.nextLine());
-        System.out.print("Enter New Quantity: ");
-        int newQuantity = Integer.parseInt(scanner.nextLine());
+        
+        int newDosage, newQuantity;
+        while (true) {
+            System.out.print("Enter New Dosage (in mg): ");
+            if (scanner.hasNextInt()) {
+                newDosage = scanner.nextInt();
+                scanner.nextLine(); // consume the newline character
+                if (newDosage > 0) break;
+                else System.out.println("Dosage must be greater than 0.");
+            } else {
+                System.out.println("Invalid input. Please enter a valid dosage.");
+                scanner.next(); // consume the invalid input
+            }
+        }
+
+        while (true) {
+            System.out.print("Enter New Quantity: ");
+            if (scanner.hasNextInt()) {
+                newQuantity = scanner.nextInt();
+                scanner.nextLine(); // consume the newline character
+                if (newQuantity >= 0) break;
+                else System.out.println("Quantity must be greater than or equal to 0.");
+            } else {
+                System.out.println("Invalid input. Please enter a valid quantity.");
+                scanner.next(); // consume the invalid input
+            }
+        }
+
         trackingSystem.editMedication(medicationId, newName, newDosage, newQuantity);
     }
 
