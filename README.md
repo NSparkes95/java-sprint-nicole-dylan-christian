@@ -21,15 +21,19 @@ Java Development Kit (JDK 17 or later)
 A terminal (Command Prompt, Bash, or PowerShell)
 Git (for repository access)
 
-🔹 Step 1: Clone the Repository
-git clone https://github.com/YourUsername/PharmacyManagementSystem.git
-cd PharmacyManagementSystem
+Step 1: Clone the Repository
+Run the following command to clone the repository from GitHub:
+git clone https://github.com/NSparkes95/java-sprint-nicole-dylan-christian.git
+cd java-sprint-nicole-dylan-christian
 
-🔹 Step 2: Compile the Program
+Step 2: Compile the Program
+Compile all Java files inside the src/main/java/medicationtracking/ directory and store the compiled files in the bin/ directory:
 javac -d bin src/main/java/medicationtracking/*.java
 
-🔹 Step 3: Run the Program
+Step 3: Run the Program
+Execute the Menu class to start the system:
 java -cp bin medicationtracking.Menu
+
 
 💻 How to Use the System:
 After running the program, a menu will appear. Navigate using numeric inputs to select options.
