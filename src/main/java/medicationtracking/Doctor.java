@@ -1,4 +1,10 @@
+/**Description: Doctor class represents a doctor in the medication tracking system.
+ */
+
 package medicationtracking;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Doctor class represents a doctor in the medication tracking system.
@@ -13,6 +19,9 @@ public class Doctor {
     
     // Doctor's area of specialization (e.g., cardiology)
     private String specialization;
+
+    // List of patients that the doctor is treating
+    private List<Patient> assignedPatients = new ArrayList<>(); // List of patients that the doctor is treating
 
     /**
      * Constructor to initialize doctor details.
@@ -93,10 +102,37 @@ public class Doctor {
     }
 
     /**
+     * Assign a patient to the doctor.
+     * Ensures that the patient is not already assigned to the doctor.
+     * 
+     * @param patient The patient to assign to the doctor.
+     */
+
+    /**
      * Override toString() method to display doctor details in a readable format.
      * 
      * @return Formatted string with doctor's details
      */
+    public void assignedPatients(Patient patient) {
+        if(patient == null) {
+            throw new IllegalArgumentException("Patient cannot be null.");
+        }
+        if(!assignedPatients.contains(patient)) {
+            assignedPatients.add(patient);
+            System.out.println("✅ Patient " + patient.getName() + " has been assigned to Doctor " + this.getName());
+        } else {
+            System.out.println("⚠️ Patient is already assigned to this doctor.");
+        }
+    }
+    /**
+    * Retrieves the list of patients assigned to this doctor.
+    * 
+    * @return A list of assigned patients.
+    */
+    public List<Patient> getAssignedPatients() {
+        return assignedPatients;
+    }
+
     @Override
     public String toString() {
         return "Doctor{" +

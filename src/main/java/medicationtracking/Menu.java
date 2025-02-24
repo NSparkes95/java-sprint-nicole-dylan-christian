@@ -1,5 +1,7 @@
 package medicationtracking;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -132,6 +134,8 @@ public class Menu {
             System.out.println("3. View All Doctors");
             System.out.println("4. Search Doctor by Name");
             System.out.println("5. Edit Doctor");
+            System.out.println("6. Assign Patient to Doctor");
+            System.out.println("7. List Prescriptions by Doctor");
             System.out.println("0. Back to Main Menu");
             System.out.print("Enter your choice: ");
             
@@ -152,6 +156,12 @@ public class Menu {
                     break;
                 case 5:
                     editDoctor();
+                    break;
+                case 6: // Assign Patient to Doctor 
+                    assignPatientToDoctor();
+                    break;
+                case 7: // List Prescriptions by Doctor 
+                    listPrescriptionsByDoctor();
                     break;
                 case 0:
                     break;
@@ -176,6 +186,7 @@ public class Menu {
             System.out.println("4. View All Medications");
             System.out.println("5. Search Medication by Name");
             System.out.println("6. Edit Medication");
+            System.out.println("7. Check Expired Medications");
             System.out.println("0. Back to Main Menu");
             System.out.print("Enter your choice: ");
             
@@ -200,6 +211,9 @@ public class Menu {
                 case 6:
                     editMedication();
                     break;
+                case 7:
+                    trackingSystem.checkExpiredMedications();
+                    break;
                 case 0:
                     break;
                 default:
@@ -220,6 +234,7 @@ public class Menu {
             System.out.println("1. Add Prescription");
             System.out.println("2. Delete Prescription");
             System.out.println("3. View All Prescriptions");
+            System.out.println("4. View Prescriptions by Patient");
             System.out.println("0. Back to Main Menu");
             System.out.print("Enter your choice: ");
             
@@ -234,6 +249,9 @@ public class Menu {
                     break;
                 case 3:
                     viewAllPrescriptions();
+                    break;
+                case 4:
+                    viewPrescriptionsByPatient();
                     break;
                 case 0:
                     break;
@@ -390,6 +408,31 @@ public class Menu {
         trackingSystem.editDoctor(doctorId, newName, newSpecialization);
     }
 
+    private void assignPatientToDoctor() {
+        System.out.print("Enter Doctor ID: ");
+        String doctorId = scanner.nextLine();
+
+        System.out.print("Enter Patient ID: ");
+        String patientId = scanner.nextLine();
+
+        boolean success = trackingSystem.assignPatientToDoctor(doctorId, patientId);
+
+        if (success) {
+            System.out.println("Patient assigned to doctor successfully!");
+        } else {
+            System.out.println("Failed to assign patient. Check IDs and try again.");
+        }
+    }
+
+    /** 
+     * Lists all prescriptions by a doctor.
+     */
+    private void listPrescriptionsByDoctor() {
+        System.out.print("Enter Doctor ID: ");
+        String doctorId = scanner.nextLine();
+        trackingSystem.displayPrescriptionsByDoctor(doctorId);
+    }
+
     // ============================================================
     // === Medication Menu Methods ===
     // ============================================================
@@ -402,9 +445,9 @@ public class Menu {
         String id = scanner.nextLine();
         System.out.print("Enter Medication Name: ");
         String name = scanner.nextLine();
-        
+
         int dosage, quantity;
-        while (true) {
+        while(true) {
             System.out.print("Enter Dosage (in mg): ");
             if (scanner.hasNextInt()) {
                 dosage = scanner.nextInt();
@@ -416,9 +459,8 @@ public class Menu {
                 scanner.next(); // consume the invalid input
             }
         }
-        
-        while (true) {
-            System.out.print("Enter Quantity in Stock: ");
+        while(true) {
+            System.out.print("Enter Quantity: ");
             if (scanner.hasNextInt()) {
                 quantity = scanner.nextInt();
                 scanner.nextLine(); // consume the newline character
@@ -429,8 +471,18 @@ public class Menu {
                 scanner.next(); // consume the invalid input
             }
         }
-
-        Medication medication = new Medication(id, name, dosage, quantity);
+        // Ask for the expiry date
+        LocalDate expiryDate = null;
+        while (expiryDate == null) {
+            System.out.print("Enter Expiry Date (yyyy-mm-dd): ");
+            String date = scanner.nextLine();
+            try {
+                expiryDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            } catch (Exception e) {
+                System.out.println("Invalid date format. Please enter a valid date in the format yyyy-mm-dd.");
+            }
+        }
+        Medication medication = new Medication(id, name, dosage, quantity, expiryDate);
         trackingSystem.addMedication(medication);
     }
 
@@ -554,6 +606,14 @@ public class Menu {
             System.out.println("Instructions: " + p.getInstructions());
             System.out.println("--------------------------------");
         }
+    }
+    /**
+    * Prompts the user to enter a patient ID and displays their prescriptions.
+    */
+    private void viewPrescriptionsByPatient() {
+        System.out.print("\nEnter Patient ID to view prescriptions: ");
+        String patientId = scanner.nextLine();
+        trackingSystem.displayPrescriptionsByDoctor(patientId);
     }
 
     /**

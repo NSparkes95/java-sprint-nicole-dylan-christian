@@ -7,19 +7,14 @@ package medicationtracking;
 public class Prescription {
     // Unique identifier for the prescription
     private String prescriptionId;
-    
     // ID of the patient the prescription is for
     private String patientId;
-    
     // ID of the doctor who issued the prescription
     private String doctorId;
-    
     // ID of the prescribed medication
     private String medicationId;
-    
     // Quantity of the medication prescribed
     private int quantity;
-    
     // Instructions for taking the medication
     private String instructions;
 

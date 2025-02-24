@@ -1,4 +1,11 @@
+/** Description: Medication class represents a medication in the medication tracking system.
+ * 
+ */
+
 package medicationtracking;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Medication class represents a medication in the medication tracking system.
@@ -17,6 +24,9 @@ public class Medication {
     // Quantity available in stock
     private int quantityInStock;
 
+    // Expiry date of the medication
+    private LocalDate expiryDate; 
+
     /**
      * Constructor to initialize medication details.
      * It includes input validation to ensure that all fields are valid.
@@ -25,9 +35,10 @@ public class Medication {
      * @param name - Name of the medication
      * @param dosage - Dosage of the medication in mg (must be positive)
      * @param quantityInStock - Quantity available in stock (must be positive)
+     * @param expiryDate The expiry date of the medication.
      * @throws IllegalArgumentException if any parameter is invalid
      */
-    public Medication(String id, String name, int dosage, int quantityInStock) {
+    public Medication(String id, String name, int dosage, int quantityInStock, LocalDate expiryDate) {
         if (id == null || id.trim().isEmpty()) {
             throw new IllegalArgumentException("Medication ID cannot be empty.");
         }
@@ -40,11 +51,15 @@ public class Medication {
         if (quantityInStock < 0) {
             throw new IllegalArgumentException("Quantity in stock cannot be negative.");
         }
+        if (expiryDate == null) {
+            throw new IllegalArgumentException("Expiry date cannot be null.");
+        }
 
         this.id = id;
         this.name = name;
         this.dosage = dosage;
         this.quantityInStock = quantityInStock;
+        this.expiryDate = expiryDate;
     }
 
     /**
@@ -116,16 +131,26 @@ public class Medication {
     }
 
     /**
+     * Getter method for the expiry date of the medication.
+     * @return The expiry date of the medication.
+     */
+    public boolean isExpired() {
+        return expiryDate.isBefore(LocalDate.now());
+    }
+
+    /**
      * Override toString() method to display medication details in a readable format.
      * @return Formatted string with medication details
      */
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return "Medication{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", dosage=" + dosage + "mg" +
                 ", quantityInStock=" + quantityInStock +
+                ", expiryDate=" + expiryDate.format(formatter) +
                 '}';
     }
 }

@@ -1,6 +1,9 @@
+/**Description: This class manages the lists and operations for the medication tracking system.
+ * 
+ */
+
 package medicationtracking;
 
-import medicationtracking.Prescription;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
@@ -89,6 +92,37 @@ public class MedicationTrackingSystem {
         System.out.println("No patient found with ID: " + patientId);
     }
 
+    /**
+    * Assigns a patient to a doctor using their IDs.
+    * 
+    * @param doctorId The unique ID of the doctor.
+    * @param patientId The unique ID of the patient.
+    * @return True if assignment is successful, false otherwise
+    */
+    public boolean assignPatientToDoctor(String doctorId, String patientId) {
+        Doctor doctor = doctors.stream()
+                .filter(d -> d.getId().equals(doctorId))
+                .findFirst()
+                .orElse(null);
+    
+        Patient patient = patients.stream()
+                .filter(p -> p.getId().equals(patientId))
+                .findFirst()
+                .orElse(null);
+    
+        if (doctor == null) {
+            System.out.println("Doctor not found.");
+            return false;
+        }
+        if (patient == null) {
+            System.out.println("Patient not found.");
+            return false;
+        }
+    
+        doctor.getAssignedPatients().add(patient);
+        return true;
+    }
+
     // ============================================================
     // === Doctor Management Methods ===
     // ============================================================
@@ -155,6 +189,31 @@ public class MedicationTrackingSystem {
             }
         }
         System.out.println("No doctor found with ID: " + doctorId);
+    }
+
+    /**
+    * Displays all prescriptions issued by a specific doctor.
+    * 
+    * @param doctorId The ID of the doctor whose prescriptions should be listed.
+    */
+    public void displayPrescriptionsByDoctor(String doctorId) {
+        System.out.println("\n=== Prescriptions Issued by Doctor: " + doctorId + " ===");
+
+        List<Prescription> doctorPrescriptions = prescriptions.stream()
+                .filter(p -> p.getDoctorId().equals(doctorId))
+                .collect(Collectors.toList()); // ✅ Collect the filtered prescriptions
+    
+        if (doctorPrescriptions.isEmpty()) {
+            System.out.println("No prescriptions found for doctor with ID: " + doctorId);
+        } 
+        for (Prescription p : doctorPrescriptions) {
+            System.out.println("\nPrescription ID: " + p.getPrescriptionId());
+            System.out.println("Patient ID: " + p.getPatientId());
+            System.out.println("Medication ID: " + p.getMedicationId());
+            System.out.println("Quantity: " + p.getQuantity());
+            System.out.println("Instructions: " + p.getInstructions());
+            System.out.println("--------------------------------");
+        }
     }
 
     // ============================================================
@@ -246,6 +305,25 @@ public class MedicationTrackingSystem {
         System.out.println("No medication found with ID: " + medicationId);
     }
 
+    /**
+    * Checks and displays expired medications.
+    */
+    public void checkExpiredMedications() {
+        System.out.println("\n=== Expired Medications ===");
+
+        List<Medication> expiredMedications = medications.stream()
+            .filter(Medication::isExpired)
+            .collect(Collectors.toList());
+
+        if (expiredMedications.isEmpty()) {
+            System.out.println("No expired medications found.");
+        } else {
+            for (Medication med : expiredMedications) {
+                System.out.println(med);
+            }
+        }
+    }
+
     // ============================================================
     // === Prescription Management Methods ===
     // ============================================================
@@ -277,6 +355,30 @@ public class MedicationTrackingSystem {
             System.out.println("Prescription deleted successfully!");
         } else {
             System.out.println("No prescription found with ID: " + prescriptionId);
+        }
+    }
+    /**
+    * Displays all prescriptions for a specific patient.
+    * 
+    * @param patientId The ID of the patient whose prescriptions are to be listed.
+    */
+    public void displayPrescriptionsByPatient(String patientId) {
+        System.out.println("\n=== Prescriptions for Patient: " + patientId + " ===");
+
+        List<Prescription> patientPrescriptions = prescriptions.stream()
+                .filter(p -> p.getPatientId().equals(patientId))
+                .collect(Collectors.toList()); // ✅ Collect the filtered prescriptions
+    
+        if (patientPrescriptions.isEmpty()) {
+            System.out.println("No prescriptions found for patient with ID: " + patientId);
+        } 
+        for (Prescription p : patientPrescriptions) {
+            System.out.println("\nPrescription ID: " + p.getPrescriptionId());
+            System.out.println("Doctor ID: " + p.getDoctorId());
+            System.out.println("Medication ID: " + p.getMedicationId());
+            System.out.println("Quantity: " + p.getQuantity());
+            System.out.println("Instructions: " + p.getInstructions());
+            System.out.println("--------------------------------");
         }
     }
 
