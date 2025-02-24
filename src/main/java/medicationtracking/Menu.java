@@ -43,6 +43,7 @@ public class Menu {
             System.out.println("2. Doctors");
             System.out.println("3. Medications");
             System.out.println("4. Prescriptions");
+            System.out.println("5. Reports");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             
@@ -52,15 +53,19 @@ public class Menu {
                 case 1:
                     showPatientMenu();
                     break;
-                case 2:
+                case 2: // Doctor Menu
                     showDoctorMenu();
                     break;
-                case 3:
+                case 3: // Medication Menu
                     showMedicationMenu();
                     break;
-                case 4:
+                case 4: // Prescription Menu
                     showPrescriptionMenu();
                     break;
+                case 5: // ✅ System-Wide Report option
+                    showReportMenu();
+                    break;
+            
                 case 0:
                     System.out.println("Exiting Medication Tracking System...");
                     break;
@@ -167,28 +172,32 @@ public class Menu {
             System.out.println("\n=== Medication Management ===");
             System.out.println("1. Add Medication");
             System.out.println("2. Delete Medication");
-            System.out.println("3. View All Medications");
-            System.out.println("4. Search Medication by Name");
-            System.out.println("5. Edit Medication");
+            System.out.println("3. Restock Medications");
+            System.out.println("4. View All Medications");
+            System.out.println("5. Search Medication by Name");
+            System.out.println("6. Edit Medication");
             System.out.println("0. Back to Main Menu");
             System.out.print("Enter your choice: ");
             
             choice = Integer.parseInt(scanner.nextLine());
     
             switch (choice) {
-                case 1:
-                    addMedication();
+                case 1: // Calls the restock method
+                    trackingSystem.restockMedications();
                     break;
                 case 2:
-                    deleteMedication();
+                    addMedication();
                     break;
                 case 3:
-                    viewAllMedications();
+                    deleteMedication();
                     break;
                 case 4:
-                    searchMedication();
+                    viewAllMedications();
                     break;
                 case 5:
+                    searchMedication();
+                    break;
+                case 6:
                     editMedication();
                     break;
                 case 0:
@@ -529,6 +538,54 @@ public class Menu {
      * Displays all prescriptions in the system.
      */
     private void viewAllPrescriptions() {
-        trackingSystem.displayAllPrescriptions();
+        System.out.println("\n=== All Prescriptions ===");
+
+        if (trackingSystem.getPrescriptions().isEmpty()) {
+            System.out.println("No prescriptions found.");
+            return;
+        }
+    
+        for (Prescription p : trackingSystem.getPrescriptions()) {
+            System.out.println("\nPrescription ID: " + p.getPrescriptionId());
+            System.out.println("Patient ID: " + p.getPatientId());
+            System.out.println("Doctor ID: " + p.getDoctorId());
+            System.out.println("Medication ID: " + p.getMedicationId());
+            System.out.println("Quantity: " + p.getQuantity());
+            System.out.println("Instructions: " + p.getInstructions());
+            System.out.println("--------------------------------");
+        }
     }
+
+    /**
+    * Displays the report menu and allows the user to choose a report type.
+    * The user can generate a system-wide report or a prescription report.
+    */
+    private void showReportMenu() {
+        int choice;
+
+        do {
+            System.out.println("\n=== Report Menu ===");
+            System.out.println("1. System-Wide Report");
+            System.out.println("2. Prescription Report");
+            System.out.println("0. Back to Main Menu");
+            System.out.print("Enter your choice: ");
+
+            choice = Integer.parseInt(scanner.nextLine());
+
+            switch (choice) {
+                case 1:
+                    trackingSystem.generateSystemReport();
+                    break;
+                case 2:
+                    trackingSystem.generatePrescriptionReport();
+                    break;
+                case 0:
+                    return; // Go back to the main menu
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+        } while (choice != 0);
+    }
+            
+
 }

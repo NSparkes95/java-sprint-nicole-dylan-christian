@@ -1,7 +1,9 @@
 package medicationtracking;
 
-import java.util.ArrayList;
+import medicationtracking.Prescription;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 /**
  * MedicationTrackingSystem class manages the lists and operations 
@@ -12,10 +14,10 @@ import java.util.List;
 public class MedicationTrackingSystem {
 
     // === Data Storage ===
+    private List<Prescription> prescriptions = new ArrayList<>();
     private List<Patient> patients = new ArrayList<>();
     private List<Doctor> doctors = new ArrayList<>();
     private List<Medication> medications = new ArrayList<>();
-    private List<Prescription> prescriptions = new ArrayList<>();
 
     // ============================================================
     // === Patient Management Methods ===
@@ -169,6 +171,25 @@ public class MedicationTrackingSystem {
     }
 
     /**
+ * Restocks all medications in the pharmacy by increasing their quantity.
+ * The restock amount is randomly generated between 5 and 15 units per medication.
+ */
+    public void restockMedications() { // Restocks all medications in the pharmacy
+        if (medications.isEmpty()) {
+            System.out.println("No medications available to restock.");
+            return;
+        }
+
+        for (Medication med : medications) { // Restocks each medication
+            int addedStock = (int) (Math.random() * 11) + 5; // Adds between 5-15 units
+            med.setQuantityInStock(med.getQuantityInStock() + addedStock);
+            System.out.println("Restocked " + med.getName() + " by " + addedStock + " units. New total: " + med.getQuantityInStock());
+        }
+        System.out.println("All medications have been restocked.");
+    }
+
+
+    /**
      * Deletes a medication by ID.
      * @param medicationId The ID of the medication to delete.
      */
@@ -260,14 +281,106 @@ public class MedicationTrackingSystem {
     }
 
     /**
-     * Displays all prescriptions.
+    * Returns the list of all prescriptions.
+     * @return List of prescriptions in the system
+    */
+    public List<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+
+    // ============================================================
+    // === Report Methods ===
+    // ============================================================
+
+    /**
+    * Displays all prescriptions in a detailed format.
+    * Lists patient, doctor, medication, dosage, and instructions.
+    */
+    
+    public void generatePrescriptionReport() {
+        System.out.println("\n=== All Prescriptions ===");
+
+        if (prescriptions.isEmpty()) {
+            System.out.println("No prescriptions found.");
+            return;
+        } 
+        
+        for (Prescription p : prescriptions) {
+            // Get Patient (If Prescription stores only an ID, find Patient object)
+            Patient patient = patients.stream()
+                .filter(pt -> pt.getId().equals(p.getPatientId())) // ✅ Compare IDs correctly
+                .findFirst()
+                .orElse(null);
+    
+            // Get Doctor (If Prescription stores only an ID, find Doctor object)
+            Doctor doctor = doctors.stream()
+                .filter(dr -> dr.getId().equals(p.getDoctorId()))
+                .findFirst()
+                .orElse(null);
+    
+            // Get Medication (If Prescription stores only an ID, find Medication object)
+            Medication medication = medications.stream()
+                .filter(med -> med.getId().equals(p.getMedicationId()))
+                .findFirst()
+                .orElse(null);
+    
+            System.out.println("\nPatient: " + (patient != null ? patient.getName() : "Unknown"));
+            System.out.println("Doctor: " + (doctor != null ? doctor.getName() : "Unknown"));
+            System.out.println("Medication: " + (medication != null ? medication.getName() : "Unknown"));
+            System.out.println("Quantity: " + p.getQuantity());
+            System.out.println("Instructions: " + p.getInstructions());
+            System.out.println("--------------------------------");
+        }
+    }
+
+      /**
+     * Generates a system-wide report displaying all patients, doctors, medications, and prescriptions.
+     * If any section is empty, it displays a message indicating no records found.
      */
-    public void displayAllPrescriptions() {
+    public void generateSystemReport() {
+        System.out.println("\n=== System-WIDE Report ===");
+        
+        // Print all patients 
+        System.out.println("\n=== All Patients ===");
+        if (patients.isEmpty()) {
+            System.out.println("No patients found.");
+        } else {
+            for (Patient p : patients) {
+                System.out.println(p);
+            }
+        }
+
+        // Print all doctors
+        System.out.println("\n=== All Doctors ===");
+        if (doctors.isEmpty()) {
+            System.out.println("No doctors found.");
+        } else {
+            for (Doctor d : doctors) {
+                System.out.println(d);
+            }
+        }
+
+        // Print all medications
+        System.out.println("\n=== All Medications ===");
+        if (medications.isEmpty()) {
+            System.out.println("No medications found.");
+        } else {
+            for (Medication m : medications) {
+                System.out.println(m);
+            }
+        }
+
+        // Print all prescriptions
         System.out.println("\n=== All Prescriptions ===");
         if (prescriptions.isEmpty()) {
             System.out.println("No prescriptions found.");
         } else {
-            prescriptions.forEach(System.out::println);
+            for (Prescription p : prescriptions) {
+                System.out.println(p);
+            }
         }
+
+        System.out.println("\n=== End of Report ===");
     }
 }
