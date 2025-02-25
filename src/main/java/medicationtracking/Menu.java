@@ -40,14 +40,14 @@ public class Menu {
         /* Medication Tracking System Start UP Menu */
         do {
             System.out.println("\n=== Medication Tracking System ===");
-            System.out.println("Welcome to the Medication Tracking System. Please make a choice below:");
+            System.out.println("Welcome to the Medication Tracking System. Please select a number below:");
             System.out.println("1. Patients");
             System.out.println("2. Doctors");
             System.out.println("3. Medications");
             System.out.println("4. Prescriptions");
             System.out.println("5. Reports");
             System.out.println("0. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.print("Enter your choice (Enter Number): ");
             
             choice = Integer.parseInt(scanner.nextLine());
     
@@ -92,7 +92,7 @@ public class Menu {
             System.out.println("4. Search Patient by Name");
             System.out.println("5. Edit Patient");
             System.out.println("0. Back to Main Menu");
-            System.out.print("Enter your choice: ");
+            System.out.print("Enter your choice (Enter Number): ");
             
             choice = Integer.parseInt(scanner.nextLine());
     
@@ -137,7 +137,7 @@ public class Menu {
             System.out.println("6. Assign Patient to Doctor");
             System.out.println("7. List Prescriptions by Doctor");
             System.out.println("0. Back to Main Menu");
-            System.out.print("Enter your choice: ");
+            System.out.print("Enter your choice (Enter Number): ");
             
             choice = Integer.parseInt(scanner.nextLine());
     
@@ -188,7 +188,7 @@ public class Menu {
             System.out.println("6. Edit Medication");
             System.out.println("7. Check Expired Medications");
             System.out.println("0. Back to Main Menu");
-            System.out.print("Enter your choice: ");
+            System.out.print("Enter your choice (Enter Number): ");
             
             choice = Integer.parseInt(scanner.nextLine());
     
@@ -236,7 +236,7 @@ public class Menu {
             System.out.println("3. View All Prescriptions");
             System.out.println("4. View Prescriptions by Patient");
             System.out.println("0. Back to Main Menu");
-            System.out.print("Enter your choice: ");
+            System.out.print("Enter your choice (Enter Number): ");
             
             choice = Integer.parseInt(scanner.nextLine());
     
@@ -628,7 +628,7 @@ public class Menu {
             System.out.println("1. System-Wide Report");
             System.out.println("2. Prescription Report");
             System.out.println("0. Back to Main Menu");
-            System.out.print("Enter your choice: ");
+            System.out.print("Enter your choice (Enter Number): ");
 
             choice = Integer.parseInt(scanner.nextLine());
 
