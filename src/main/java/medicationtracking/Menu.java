@@ -193,14 +193,14 @@ public class Menu {
             choice = Integer.parseInt(scanner.nextLine());
     
             switch (choice) {
-                case 1: // Calls the restock method
-                    trackingSystem.restockMedications();
-                    break;
-                case 2:
+                case 1:
                     addMedication();
                     break;
-                case 3:
+                case 2:
                     deleteMedication();
+                    break;
+                case 3:
+                    trackingSystem.restockMedications();
                     break;
                 case 4:
                     viewAllMedications();
