@@ -356,19 +356,28 @@ public class Menu {
     // ============================================================
 
     /**
-     * Adds a new doctor to the system.
-     */
-    private void addDoctor() {
-        System.out.print("Enter Doctor ID: ");
-        String id = scanner.nextLine();
-        System.out.print("Enter Doctor Name: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter Doctor Specialization: ");
-        String specialization = scanner.nextLine();
+ * Adds a new doctor to the system.
+ */
+private void addDoctor() {
+    System.out.print("Enter Doctor ID: ");
+    String id = scanner.nextLine();
 
-        Doctor doctor = new Doctor(id, name, specialization);
-        trackingSystem.addDoctor(doctor);
-    }
+    System.out.print("Enter Doctor Name: ");
+    String name = scanner.nextLine();
+
+    System.out.print("Enter Doctor Phone Number: "); // ✅ Added missing phone number input
+    String phoneNumber = scanner.nextLine();
+
+    System.out.print("Enter Doctor Specialization: ");
+    String specialization = scanner.nextLine();
+
+    // ✅ Updated to use the correct constructor
+    Doctor doctor = new Doctor(id, name, phoneNumber, specialization);
+
+    trackingSystem.addDoctor(doctor);
+    System.out.println("Doctor added successfully!");
+}
+
 
     /**
      * Deletes a doctor by ID.
